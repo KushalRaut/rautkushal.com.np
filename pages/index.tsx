@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useAppSelector, useAppDispatch } from '../hooks/redux';
+import useAppDispatch from '../hooks/useAppDispatch';
+import useAppSelector from '../hooks/useAppSelector';
 import { setTheme } from '../redux/theme/themeSlice';
 
 const Home: NextPage = () => {
