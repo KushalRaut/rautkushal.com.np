@@ -18,7 +18,6 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="bg-white text-black dark:bg-black dark:text-white">
-        <h1>Hello Guys This is my first time in darkmode</h1>
         <button
           onClick={() => {
             dispatch(setTheme('light'));
