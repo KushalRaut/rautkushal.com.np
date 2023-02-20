@@ -1,22 +1,22 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { sanityClient } from 'lib/sanity-server';
-import { postsQuery } from 'lib/queries';
-import Container from 'components/Container';
-import Image from 'next/image';
-import BlogPostCard from 'components/BlogPostCard';
-import Link from 'next/link';
-import ProjectListItem from 'components/ProjectListItem';
-import { FaReact, FaNode } from 'react-icons/fa';
+import type { NextPage } from "next";
+import Head from "next/head";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { sanityClient } from "lib/sanity-server";
+import { postsQuery } from "lib/queries";
+import Container from "components/Container";
+import Image from "next/image";
+import BlogPostCard from "components/BlogPostCard";
+import Link from "next/link";
+import ProjectListItem from "components/ProjectListItem";
+import { FaReact, FaNode } from "react-icons/fa";
 import {
   SiTailwindcss,
   SiTypescript,
   SiStyledcomponents,
   SiMongodb,
-} from 'react-icons/si';
-import { TbBrandNextjs } from 'react-icons/tb';
+} from "react-icons/si";
+import { TbBrandNextjs } from "react-icons/tb";
 
 const Home: NextPage = (props) => {
   const [mounted, setMounted] = useState(false);
@@ -24,7 +24,6 @@ const Home: NextPage = (props) => {
 
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
-  console.log(props);
 
   if (!mounted) {
     return null;
@@ -45,7 +44,7 @@ const Home: NextPage = (props) => {
                 Kushal Raut
               </h1>
               <h2 className="text-gray-700 dark:text-gray-200 mb-4">
-                Software Engineer at{' '}
+                Software Engineer at{" "}
                 <span className="font-semibold">Kotuko</span>
               </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-16">
