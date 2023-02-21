@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^4.10.1",
     "@sanity/image-url": "^1.0.1",
     "@sanity/webhook": "^2.0.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "next": "12.3.1",
+    "next-auth": "^4.19.2",
     "next-sanity": "^0.8.4",
     "next-themes": "^0.2.1",
     "react": "18.2.0",

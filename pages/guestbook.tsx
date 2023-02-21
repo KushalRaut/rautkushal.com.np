@@ -23,17 +23,19 @@ export default function GuestbookPage({ fallbackData }) {
 }
 
 export async function getStaticProps() {
-  const entries = await prisma.guestbook.findMany({
+  const entries = await prisma.comment.findMany({
     orderBy: {
-      updated_at: "desc",
+      createdAt: "desc",
     },
   });
 
   const fallbackData = entries.map((entry) => ({
     id: entry.id.toString(),
-    body: entry.body,
-    created_by: entry.created_by.toString(),
-    updated_at: entry.updated_at.toString(),
+    createdAt: entry.createdAt.toISOString(),
+    name: entry.authorName,
+    email: entry.authorEmail,
+    message: entry.message,
+    picture: entry.authorDp,
   }));
 
   return {
