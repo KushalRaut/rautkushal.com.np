@@ -8,6 +8,7 @@ import { Form, FormState } from "lib/types";
 import SuccessMessage from "components/SuccessMessage";
 import ErrorMessage from "components/ErrorMessage";
 import LoadingSpinner from "components/LoadingSpinner";
+import Image from "next/image";
 
 function GuestbookEntry({ entry, user }) {
   const { mutate } = useSWRConfig();
@@ -20,16 +21,24 @@ function GuestbookEntry({ entry, user }) {
 
   //   mutate("/api/guestbook");
   // };
+  console.log(entry);
 
   return (
     <div className="flex flex-col space-y-2">
-      <div className="prose dark:prose-dark w-full break-words">
+      <div className="text-md text-gray-700 dark:text-white w-full break-words">
         {entry.message}
       </div>
       <div className="flex items-center space-x-3">
-        <p className="text-sm text-gray-500">{entry.authorName}</p>
-        <span className=" text-gray-200 dark:text-gray-800">/</span>
-        <p className="text-sm text-gray-400 dark:text-gray-600">
+        <p className="text-sm text-gray-300 mr-3">{entry.name}</p>
+        <Image
+          className="rounded-full"
+          src={entry.picture}
+          width={24}
+          height={24}
+          alt={entry.name}
+        />
+        <span className=" text-gray-200 dark:text-gray-300">/</span>
+        <p className="text-sm text-gray-400 dark:text-gray-300">
           {format(new Date(entry.createdAt), "d MMM yyyy 'at' h:mm bb")}
         </p>
         {/* {user && entry.created_by === user.name && (
