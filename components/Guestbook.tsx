@@ -21,7 +21,6 @@ function GuestbookEntry({ entry, user }) {
 
   //   mutate("/api/guestbook");
   // };
-  console.log(entry);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -62,6 +61,8 @@ export default function Guestbook({ fallbackData }) {
   const { mutate } = useSWRConfig();
   const [form, setForm] = useState<FormState>({ state: Form.Initial });
   const inputEl = useRef(null);
+  console.log(fallbackData);
+
   const { data: entries } = useSWR("/api/guestbook", fetcher, {
     fallbackData,
   });
