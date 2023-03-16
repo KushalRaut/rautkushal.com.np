@@ -17,7 +17,7 @@ export default function ProjectsPage({ fallbackData }) {
             "Building projects is what I love to do in my free time. Below are some of the projects I've built.All these projects are open source so be sure to checkout the source code."
           }
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <ProjectCard />
           <ProjectCard />
           <ProjectCard />
