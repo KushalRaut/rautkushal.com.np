@@ -1,19 +1,22 @@
-import { Suspense, useState } from 'react';
+import { Suspense, useState } from "react";
 
-import Container from 'components/Container';
-import BlogPost from 'components/BlogPost';
-import { InferGetStaticPropsType } from 'next';
-import { postsQuery } from 'lib/queries';
-import { getClient } from 'lib/sanity-server';
-import { Post } from 'lib/types';
+import Container from "components/Container";
+import BlogPost from "components/BlogPost";
+import { InferGetStaticPropsType } from "next";
+import { postsQuery } from "lib/queries";
+import { getClient } from "lib/sanity-server";
+import { Post } from "lib/types";
+import { allBlogs } from "contentlayer/generated";
 
 export default function Blog({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const filteredBlogPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase())
   );
+
+  console.log(allBlogs);
 
   return (
     <Container
@@ -81,17 +84,17 @@ export default function Blog({
           <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
             All Posts
           </h3>
-          {!filteredBlogPosts.length && (
+          {!allBlogs.length && (
             <p className="mb-4 text-gray-600 dark:text-gray-400">
               No posts found.
             </p>
           )}
-          {filteredBlogPosts.map((post, index) => (
+          {allBlogs.map((post, index) => (
             <BlogPost
               key={post.title}
               slug={post.slug}
               title={post.title}
-              excerpt={'Lorem Bro'}
+              excerpt={post.summary}
               border={index}
             />
           ))}
