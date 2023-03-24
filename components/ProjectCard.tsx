@@ -6,8 +6,8 @@ import { FiArrowUpRight } from "react-icons/fi";
 
 const ProjectCard = () => {
   return (
-    <div className="group flex flex-col justify-center  border border-1 border-gray-400 rounded-lg p-3 cursor-pointer lg:max-h-[18.5rem] hover:scale-103 hover:transition-all">
-      <h2 className="text-white text-xl font-bold">Hoobank</h2>
+    <div className="group flex flex-col justify-center  border border-1 border-gray-400 rounded-lg p-3 cursor-pointer lg:max-h-[20rem] hover:scale-103 hover:transition-all">
+      <h2 className="text-white text-xl font-bold p-0 m-0">Hoobank</h2>
       <p className="text-gray-500">
         A simple bank app made using React,Tailwind and an amazing UI
       </p>
