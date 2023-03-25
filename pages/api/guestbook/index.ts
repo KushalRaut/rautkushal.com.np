@@ -6,6 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log("Entered The API");
   if (req.method === "GET") {
     const entries = await prisma.comment.findMany({
       orderBy: {
@@ -25,6 +26,8 @@ export default async function handler(
     );
   }
 
+  console.log("Bypass the get entered the post API method");
+
   const session = await getSession({ req });
   const { email, name, image } = session.user;
 
@@ -33,6 +36,7 @@ export default async function handler(
   }
 
   if (req.method === "POST") {
+    console.log("Entered the post API method if clause");
     const newEntry = await prisma.comment.create({
       data: {
         authorName: name,
