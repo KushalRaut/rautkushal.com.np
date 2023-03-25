@@ -9,6 +9,7 @@ import SuccessMessage from "components/SuccessMessage";
 import ErrorMessage from "components/ErrorMessage";
 import LoadingSpinner from "components/LoadingSpinner";
 import Image from "next/image";
+import axios from "axios";
 
 function GuestbookEntry({ entry, user }) {
   const { mutate } = useSWRConfig();
@@ -71,23 +72,25 @@ export default function Guestbook({ fallbackData }) {
     setForm({ state: Form.Loading });
 
     console.log("before fetch", inputEl.current.value);
-    const res = await fetch("/api/guestbook", {
-      body: JSON.stringify({
-        body: inputEl.current.value,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
+    // const res = await fetch("/api/guestbook", {
+    //   body: JSON.stringify({
+    //     body: inputEl.current.value,
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   method: "POST",
+    // });
+    const response = await axios.post("/api/guestbook", {
+      message: inputEl.current.value,
     });
-    const response = await res.json();
+
     console.log("response", response);
 
-    const { error } = await res.json();
-    if (error) {
+    if (response.data.error) {
       setForm({
         state: Form.Error,
-        message: error,
+        message: response.data.error,
       });
       return;
     }

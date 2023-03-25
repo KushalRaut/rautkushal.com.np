@@ -41,7 +41,7 @@ export default async function handler(
       data: {
         authorName: name,
         authorEmail: email,
-        message: req.body.body,
+        message: req.body.message,
         authorDp: image,
       },
     });
