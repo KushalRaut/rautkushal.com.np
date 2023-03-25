@@ -73,6 +73,7 @@ export default function Guestbook({ fallbackData }) {
     e.preventDefault();
     setForm({ state: Form.Loading });
 
+    debugger;
     const res = await fetch("/api/guestbook", {
       body: JSON.stringify({
         body: inputEl.current.value,
@@ -82,6 +83,8 @@ export default function Guestbook({ fallbackData }) {
       },
       method: "POST",
     });
+    debugger;
+    console.log(JSON.stringify(res.json()), "res");
 
     const { error } = await res.json();
     if (error) {
