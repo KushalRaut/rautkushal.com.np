@@ -35,6 +35,8 @@ export default async function handler(
     return res.status(403).send("Unauthorized");
   }
 
+  console.log(req);
+
   if (req.method === "POST") {
     console.log("Entered the post API method if clause");
     const newEntry = await prisma.comment.create({
