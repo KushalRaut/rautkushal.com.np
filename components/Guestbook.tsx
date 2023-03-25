@@ -61,19 +61,16 @@ export default function Guestbook({ fallbackData }) {
   const { mutate } = useSWRConfig();
   const [form, setForm] = useState<FormState>({ state: Form.Initial });
   const inputEl = useRef(null);
-  console.log(fallbackData);
 
   const { data: entries } = useSWR("/api/guestbook", fetcher, {
     fallbackData,
   });
 
-  console.log(session);
-
   const leaveEntry = async (e) => {
     e.preventDefault();
     setForm({ state: Form.Loading });
 
-    debugger;
+    console.log("before fetch", inputEl.current.value);
     const res = await fetch("/api/guestbook", {
       body: JSON.stringify({
         body: inputEl.current.value,
@@ -83,8 +80,8 @@ export default function Guestbook({ fallbackData }) {
       },
       method: "POST",
     });
-    debugger;
-    console.log(JSON.stringify(res.json()), "res");
+    const response = await res.json();
+    console.log("response", response);
 
     const { error } = await res.json();
     if (error) {
