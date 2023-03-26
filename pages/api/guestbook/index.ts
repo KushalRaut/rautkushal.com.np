@@ -6,15 +6,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log("Entered The API");
   if (req.method === "GET") {
     const entries = await prisma.comment.findMany({
       orderBy: {
         createdAt: "desc",
       },
     });
-
-    console.log("Entered the get API method");
 
     return res.json(
       entries.map((entry) => ({
@@ -28,26 +25,18 @@ export default async function handler(
     );
   }
 
-  console.log("Bypass the get entered the post API method");
-
-  const session = await getSession({ req });
-  console.log("just before the session clause", JSON.stringify(req));
-  const { email, name, image } = session.user;
-
-  if (!session) {
+  if (!req.body.session) {
     return res.status(403).send("Unauthorized");
   }
-
-  console.log(req);
+  const { authorName, authorEmail, authorDp, message } = req.body;
 
   if (req.method === "POST") {
-    console.log("Entered the post API method if clause");
     const newEntry = await prisma.comment.create({
       data: {
-        authorName: name,
-        authorEmail: email,
-        message: req.body.message,
-        authorDp: image,
+        authorName,
+        authorEmail,
+        message,
+        authorDp,
       },
     });
 
