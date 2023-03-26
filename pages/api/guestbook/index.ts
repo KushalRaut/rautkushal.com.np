@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import prisma from "lib/prisma";
+import { getTimeDiffMinutes } from "utils/getTimeDifference";
 
 export default async function handler(
   req: NextApiRequest,
@@ -31,6 +32,22 @@ export default async function handler(
   const { authorName, authorEmail, authorDp, message } = req.body;
 
   if (req.method === "POST") {
+    const latestComment = await prisma.comment.findFirst({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    const minDiff = getTimeDiffMinutes(latestComment.createdAt);
+
+    if (minDiff < 15) {
+      return res
+        .status(403)
+        .send(
+          "You cannot add many comments at once. Please wait a few minutes or delete your latest comment."
+        );
+    }
+
     const newEntry = await prisma.comment.create({
       data: {
         authorName,
@@ -47,6 +64,20 @@ export default async function handler(
       email: newEntry.authorEmail,
       message: newEntry.message,
       picture: newEntry.authorDp,
+    });
+  }
+
+  if (req.method === "DELETE") {
+    const { id } = req.body;
+
+    const entry = await prisma.comment.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    return res.status(200).json({
+      message: "Comment deleted successfully.",
     });
   }
 

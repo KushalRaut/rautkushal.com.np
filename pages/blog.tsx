@@ -16,8 +16,6 @@ export default function Blog({
     post.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  console.log(allBlogs);
-
   return (
     <Container
       title="Blog – Lee Robinson"

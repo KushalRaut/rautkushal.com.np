@@ -10,21 +10,24 @@ import ErrorMessage from "components/ErrorMessage";
 import LoadingSpinner from "components/LoadingSpinner";
 import Image from "next/image";
 import axios from "axios";
+import { MdDelete } from "react-icons/md";
 
 function GuestbookEntry({ entry, user }) {
   const { mutate } = useSWRConfig();
-  // const deleteEntry = async (e) => {
-  //   e.preventDefault();
+  const deleteEntry = async (e) => {
+    e.preventDefault();
 
-  //   await fetch(`/api/guestbook/${entry.id}`, {
-  //     method: "DELETE",
-  //   });
+    try {
+      await axios.delete(`/api/guestbook/${entry.id}`);
+    } catch (error) {
+      console.log(error);
+    }
 
-  //   mutate("/api/guestbook");
-  // };
+    mutate("/api/guestbook");
+  };
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-2 w-full">
       <div className="text-md text-gray-700 dark:text-white w-full break-words">
         {entry.message}
       </div>
@@ -41,17 +44,17 @@ function GuestbookEntry({ entry, user }) {
         <p className="text-sm text-gray-400 dark:text-gray-300">
           {format(new Date(entry.createdAt), "d MMM yyyy 'at' h:mm bb")}
         </p>
-        {/* {user && entry.created_by === user.name && (
+        {user && entry.email === user.email && (
           <>
             <span className="text-gray-200 dark:text-gray-800">/</span>
             <button
-              className="text-sm text-red-600 dark:text-red-400"
+              className="text-md text-red-600 dark:text-red-500"
               onClick={deleteEntry}
             >
-              Delete
+              <MdDelete />
             </button>
           </>
-        )} */}
+        )}
       </div>
     </div>
   );
@@ -71,20 +74,21 @@ export default function Guestbook({ fallbackData }) {
     e.preventDefault();
     setForm({ state: Form.Loading });
 
-    const response = await axios.post("/api/guestbook", {
-      authorName: session.user.name,
-      authorEmail: session.user.email,
-      authorDp: session.user.image,
-      message: inputEl.current.value,
-      session,
-    });
-
-    if (response.data.error) {
-      setForm({
-        state: Form.Error,
-        message: response.data.error,
+    try {
+      await axios.post("/api/guestbook", {
+        authorName: session.user.name,
+        authorEmail: session.user.email,
+        authorDp: session.user.image,
+        message: inputEl.current.value,
+        session,
       });
-      return;
+    } catch (error) {
+      console.log(error);
+      inputEl.current.value = "";
+      return setForm({
+        state: Form.Error,
+        message: error.response.data,
+      });
     }
 
     inputEl.current.value = "";
@@ -145,7 +149,7 @@ export default function Guestbook({ fallbackData }) {
           </p>
         )}
       </div>
-      <div className="mt-4 space-y-8">
+      <div className="mt-4 space-y-8 w-full">
         <Suspense fallback={null}>
           {entries?.map((entry) => (
             <GuestbookEntry key={entry.id} entry={entry} user={session?.user} />
