@@ -71,21 +71,13 @@ export default function Guestbook({ fallbackData }) {
     e.preventDefault();
     setForm({ state: Form.Loading });
 
-    console.log("before fetch", inputEl.current.value);
-    // const res = await fetch("/api/guestbook", {
-    //   body: JSON.stringify({
-    //     body: inputEl.current.value,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   method: "POST",
-    // });
     const response = await axios.post("/api/guestbook", {
+      authorName: session.user.name,
+      authorEmail: session.user.email,
+      authorDp: session.user.image,
       message: inputEl.current.value,
+      session,
     });
-
-    console.log("response", response);
 
     if (response.data.error) {
       setForm({
