@@ -14,6 +14,8 @@ export default async function handler(
       },
     });
 
+    console.log("Entered the get API method");
+
     return res.json(
       entries.map((entry) => ({
         id: entry.id.toString(),
@@ -29,6 +31,7 @@ export default async function handler(
   console.log("Bypass the get entered the post API method");
 
   const session = await getSession({ req });
+  console.log("just before the session clause", JSON.stringify(req));
   const { email, name, image } = session.user;
 
   if (!session) {
