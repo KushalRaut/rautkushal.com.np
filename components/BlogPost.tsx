@@ -33,7 +33,7 @@ export default function BlogPost({
           " hover:scale-103 transition-all duration-300"
         }
       >
-        <div className="bg-black m-1 rounded-lg p-3">
+        <div className="bg-white dark:bg-gray-900 m-1 rounded-lg p-3">
           <div className="flex flex-col justify-between md:flex-row">
             <h4 className="text-lg font-medium text-gray-900 md:text-xl dark:text-gray-100 mb-3 mt-1">
               {title}

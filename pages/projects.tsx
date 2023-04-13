@@ -1,6 +1,35 @@
 import prisma from "lib/prisma";
 import Container from "components/Container";
 import ProjectCard from "components/ProjectCard";
+import { DiReact } from "react-icons/di";
+import { SiNotion, SiStyledcomponents } from "react-icons/si";
+
+const projects = [
+  {
+    title: "Hoobank",
+    description:
+      "A simple bank app made using React,Tailwind and an amazing UI",
+    icons: (
+      <>
+        <DiReact className="text-xl mr-2" />
+        <SiNotion className="text-xl" />
+      </>
+    ),
+    img: "/sample.jpeg",
+  },
+  {
+    title: "Crytobank",
+    description:
+      "A complete landing page with animated background and breathtaking UI.",
+    icons: (
+      <>
+        <DiReact className="text-xl mr-2" />
+        <SiStyledcomponents className="text-xl" />
+      </>
+    ),
+    img: "/cryptobank.jpeg",
+  },
+];
 
 export default function ProjectsPage({ fallbackData }) {
   return (
@@ -18,11 +47,17 @@ export default function ProjectsPage({ fallbackData }) {
           }
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
-          <ProjectCard />
+          {projects.map((project, index) => {
+            return (
+              <ProjectCard
+                title={project.title}
+                description={project.description}
+                icons={project.icons}
+                img={project.img}
+                key={index}
+              />
+            );
+          })}
         </div>
       </div>
     </Container>

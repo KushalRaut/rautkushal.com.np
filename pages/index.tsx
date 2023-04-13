@@ -37,7 +37,7 @@ const Home: NextPage = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
-        <div className="flex flex-col justify-center items-start max-w-4xl border-gray-200 dark:border-gray-700 mx-auto pb-16 px-6 md:px-14">
+        <div className="flex flex-col justify-center items-start max-w-4xl border-gray-200 dark:border-gray-700 mx-auto pb-16 px-4 md:px-14">
           <div className="flex flex-col-reverse sm:flex-row items-start">
             <div className="flex flex-col pr-8">
               <h1 className="font-bold text-3xl md:text-5xl tracking-wide mb-1 text-black dark:text-white">
