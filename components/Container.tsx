@@ -9,6 +9,7 @@ import Footer from "components/Footer";
 import MobileMenu from "components/MobileMenu";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
+import { motion } from "framer-motion";
 
 function NavItem({ href, text }) {
   const router = useRouter();
@@ -67,6 +68,7 @@ export default function Container(props) {
               <NavItem href="/" text="Home" />
               <NavItem href="/blog" text="Blog" />
               <NavItem href="/projects" text="Projects" />
+              <NavItem href="/experience" text="Experience" />
               <NavItem href="/guestbook" text="Guestbook" />
               <NavItem href="/about" text="About" />
             </div>

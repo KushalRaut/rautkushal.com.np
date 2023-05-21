@@ -17,6 +17,7 @@ import {
   SiMongodb,
 } from "react-icons/si";
 import { TbBrandNextjs } from "react-icons/tb";
+import { motion } from "framer-motion";
 
 const Home: NextPage = (props) => {
   const [mounted, setMounted] = useState(false);
@@ -37,7 +38,12 @@ const Home: NextPage = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
-        <div className="flex flex-col justify-center items-start max-w-4xl border-gray-200 dark:border-gray-700 mx-auto pb-16 px-4 md:px-14">
+        <motion.div
+          className="flex flex-col justify-center items-start max-w-4xl border-gray-200 dark:border-gray-700 mx-auto pb-16 px-4 md:px-14"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, ease: [0.42, 0, 0.58, 1] }}
+        >
           <div className="flex flex-col-reverse sm:flex-row items-start">
             <div className="flex flex-col pr-8">
               <h1 className="font-bold text-3xl md:text-5xl tracking-wide mb-1 text-black dark:text-white">
@@ -161,7 +167,7 @@ const Home: NextPage = (props) => {
               />
             </svg>
           </a>
-        </div>
+        </motion.div>
       </Container>
     </div>
   );

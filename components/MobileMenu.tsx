@@ -52,6 +52,16 @@ export default function MobileMenu({ isOpen, closeMobileMenu }) {
           </li>
           <li
             className="w-full flex justify-center items-center  text-gray-900 dark:text-gray-100 text-base font-semibold"
+            style={{ transitionDelay: "225ms" }}
+          >
+            <Link href="/experience">
+              <a className="flex w-auto pb-4  hover:text-blue-400">
+                Experience
+              </a>
+            </Link>
+          </li>
+          <li
+            className="w-full flex justify-center items-center  text-gray-900 dark:text-gray-100 text-base font-semibold"
             style={{ transitionDelay: "250ms" }}
           >
             <Link href="/about">
