@@ -15,6 +15,7 @@ import {
   SiTypescript,
   SiStyledcomponents,
   SiMongodb,
+  SiMaterialui,
 } from "react-icons/si";
 import { TbBrandNextjs } from "react-icons/tb";
 import { motion } from "framer-motion";
@@ -116,8 +117,8 @@ const Home: NextPage = (props) => {
             Explore My Projects
           </h3>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-            I love building side projects in my spare time which allows me to
-            explore new frameworks and technologies
+            Below are my personal favorite projects that I have worked on. Some
+            are for fun while some are freelancing projects.
           </p>
           <ProjectListItem
             index="01"
@@ -137,13 +138,11 @@ const Home: NextPage = (props) => {
           </ProjectListItem>
           <ProjectListItem
             index="03"
-            href="https://shopitbykushal.herokuapp.com/"
-            length="1:08:30"
-            title="ShopIt: A Complete E-Commerce Platform"
+            href="https://cadminui.vercel.app/"
+            title="Cadmin: A Complete Admin Dashboard"
           >
-            <SiMongodb />
             <FaReact />
-            <FaNode />
+            <SiMaterialui />
           </ProjectListItem>
           <a
             target="_blank"
