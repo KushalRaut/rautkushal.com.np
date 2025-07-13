@@ -1,16 +1,13 @@
-import Link from 'next/link';
-import useSWR from 'swr';
-import cn from 'classnames';
-
-import fetcher from 'lib/fetcher';
+import Link from "next/link";
+import cn from "classnames";
 
 export default function BlogPostCard({ title, slug, gradient }) {
   return (
     <Link href={`/blog/${slug}`}>
       <a
         className={cn(
-          'transform hover:scale-[1.01] transition-all',
-          'rounded-xl w-full md:w-1/3 bg-gradient-to-r p-1',
+          "transform hover:scale-[1.01] transition-all",
+          "rounded-xl w-full md:w-1/3 bg-gradient-to-r p-1",
           gradient
         )}
       >

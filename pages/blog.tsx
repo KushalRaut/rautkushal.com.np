@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { useState } from "react";
 
 import Container from "components/Container";
 import BlogPost from "components/BlogPost";
@@ -53,7 +53,7 @@ export default function Blog() {
             <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
               All Posts
             </h3>
-            {filteredPosts.map((post, index) => (
+            {filteredPosts.map((post) => (
               <BlogPost
                 key={post.slug}
                 title={post.title}
@@ -70,7 +70,7 @@ export default function Blog() {
               Search Results
             </h3>
             {filteredPosts.length > 0 ? (
-              filteredPosts.map((post, index) => (
+              filteredPosts.map((post) => (
                 <BlogPost
                   key={post.slug}
                   title={post.title}

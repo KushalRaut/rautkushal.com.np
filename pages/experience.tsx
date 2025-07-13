@@ -1,6 +1,6 @@
 import Container from "components/Container";
 
-export default function ProjectsPage({ fallbackData }) {
+export default function ProjectsPage() {
   return (
     <Container
       title="Projects – Kushal Raut"

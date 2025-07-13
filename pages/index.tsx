@@ -1,27 +1,22 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Container from "components/Container";
 import Image from "next/image";
 import BlogPostCard from "components/BlogPostCard";
 import Link from "next/link";
 import ProjectListItem from "components/ProjectListItem";
-import { FaReact, FaNode } from "react-icons/fa";
+import { FaReact } from "react-icons/fa";
 import {
   SiTailwindcss,
-  SiTypescript,
   SiStyledcomponents,
-  SiMongodb,
   SiMaterialui,
 } from "react-icons/si";
-import { TbBrandNextjs } from "react-icons/tb";
 import { motion } from "framer-motion";
 import { blogPosts } from "lib/data";
 
-const Home: NextPage = (props) => {
+const Home: NextPage = () => {
   const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
 
   const gradients = [
     "from-[#D8B4FE] to-[#818CF8]",

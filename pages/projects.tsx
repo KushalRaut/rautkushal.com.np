@@ -1,4 +1,3 @@
-import prisma from "lib/prisma";
 import Container from "components/Container";
 import ProjectCard from "components/ProjectCard";
 import { DiReact } from "react-icons/di";
@@ -31,7 +30,7 @@ const projects = [
   },
 ];
 
-export default function ProjectsPage({ fallbackData }) {
+export default function ProjectsPage() {
   return (
     <Container
       title="Projects – Kushal Raut"
