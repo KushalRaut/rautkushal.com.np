@@ -36,14 +36,6 @@ export default function MobileMenu({ isOpen, closeMobileMenu }) {
 
           <li
             className="w-full flex justify-center items-center  text-gray-900 dark:text-gray-100 text-base font-semibold"
-            style={{ transitionDelay: "200ms" }}
-          >
-            <Link href="/guestbook">
-              <a className="flex w-auto pb-4  hover:text-blue-400">Guestbook</a>
-            </Link>
-          </li>
-          <li
-            className="w-full flex justify-center items-center  text-gray-900 dark:text-gray-100 text-base font-semibold"
             style={{ transitionDelay: "225ms" }}
           >
             <Link href="/projects">

@@ -22,7 +22,7 @@ function NavItem({ href, text }) {
           isActive
             ? "font-semibold text-gray-800 dark:text-gray-200"
             : "font-normal text-gray-600 dark:text-gray-400",
-          "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all"
+          "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all cursor-pointer"
         )}
       >
         <span className="capsize">{text}</span>
@@ -69,7 +69,6 @@ export default function Container(props) {
               <NavItem href="/blog" text="Blog" />
               <NavItem href="/projects" text="Projects" />
               <NavItem href="/experience" text="Experience" />
-              <NavItem href="/guestbook" text="Guestbook" />
               <NavItem href="/about" text="About" />
             </div>
             <button
@@ -114,7 +113,7 @@ export default function Container(props) {
           id="skip"
           className="flex flex-col justify-center px-8 bg-gray-50 dark:bg-gray-900"
         >
-          {children}
+          <div className="min-h-[80vh]">{children}</div>
           <Footer />
         </main>
       )}

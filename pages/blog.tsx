@@ -2,17 +2,12 @@ import { Suspense, useState } from "react";
 
 import Container from "components/Container";
 import BlogPost from "components/BlogPost";
-import { InferGetStaticPropsType } from "next";
-import { postsQuery } from "lib/queries";
-import { getClient } from "lib/sanity-server";
-import { Post } from "lib/types";
-import { allBlogs } from "contentlayer/generated";
+import { blogPosts } from "lib/data";
 
-export default function Blog({
-  posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Blog() {
   const [searchValue, setSearchValue] = useState("");
-  const filteredBlogPosts = posts.filter((post) =>
+
+  const filteredPosts = blogPosts.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 
@@ -27,7 +22,7 @@ export default function Blog({
         </h1>
         <p className="mb-4 text-gray-600 dark:text-gray-400">
           {`I've been writing online since 2022, mostly about web development and my experience as a software developer.
-            In total, I've written ${posts.length} articles on my blog.
+            In total, I've written ${blogPosts.length}+ articles on my blog.
             Use the search below to filter by title.`}
         </p>
         <div className="relative w-full mb-4">
@@ -56,54 +51,42 @@ export default function Blog({
         {!searchValue && (
           <>
             <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
-              Most Popular
+              All Posts
             </h3>
-            <BlogPost
-              title="Rust Is The Future of JavaScript Infrastructure"
-              excerpt="Why is Rust being used to replace parts of the JavaScript web ecosystem like minification (Terser), transpilation (Babel), formatting (Prettier), bundling (webpack), linting (ESLint), and more?"
-              slug="rust"
-              border={5}
-            />
-            <BlogPost
-              title="Everything I Know About Style Guides, Design Systems, and Component Libraries"
-              excerpt="A deep-dive on everything I've learned in the past year building style guides, design systems, component libraries, and their best practices."
-              slug="style-guides-component-libraries-design-systems"
-              border={18}
-            />
-            <BlogPost
-              title="Building a Design System Monorepo with Turborepo"
-              excerpt="Manage multiple packages with a shared build, test, and release process using Turborepo, Changesets, Storybook, and more."
-              slug="turborepo-design-system-monorepo"
-              border={9}
-            />
+            {filteredPosts.map((post, index) => (
+              <BlogPost
+                key={post.slug}
+                title={post.title}
+                excerpt={post.excerpt}
+                slug={post.slug}
+                border={post.border}
+              />
+            ))}
           </>
         )}
-        <Suspense fallback={null}>
-          <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
-            All Posts
-          </h3>
-          {!allBlogs.length && (
-            <p className="mb-4 text-gray-600 dark:text-gray-400">
-              No posts found.
-            </p>
-          )}
-          {allBlogs.map((post, index) => (
-            <BlogPost
-              key={post.title}
-              slug={post.slug}
-              title={post.title}
-              excerpt={post.summary}
-              border={index}
-            />
-          ))}
-        </Suspense>
+        {searchValue && (
+          <>
+            <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black md:text-4xl dark:text-white">
+              Search Results
+            </h3>
+            {filteredPosts.length > 0 ? (
+              filteredPosts.map((post, index) => (
+                <BlogPost
+                  key={post.slug}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                  slug={post.slug}
+                  border={post.border}
+                />
+              ))
+            ) : (
+              <p className="text-gray-600 dark:text-gray-400">
+                {`No posts found matching "${searchValue}"`}
+              </p>
+            )}
+          </>
+        )}
       </div>
     </Container>
   );
-}
-
-export async function getStaticProps({ preview = false }) {
-  const posts: Post[] = await getClient(preview).fetch(postsQuery);
-
-  return { props: { posts } };
 }

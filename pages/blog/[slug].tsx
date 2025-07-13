@@ -1,44 +1,80 @@
+import AuthVsAuthorization from "components/Blogs/AuthVsAuthorization";
+import CssGridFlexboxGuide from "components/Blogs/CssGridFlexboxGuide";
+import DatabaseDesignPatterns from "components/Blogs/DatabaseDesignPatterns";
+import DevopsJSDevelopers from "components/Blogs/DevopsJSDevelopers";
+import GraphQLVsRest from "components/Blogs/GraphQLVsRest";
+import MasteringReactHooks from "components/Blogs/MasteringReactHooks";
+import MicroservicesNodejsDocker from "components/Blogs/MicroservicesNodejsDocker";
+import NextjsServerComponents from "components/Blogs/NextjsServerComponents";
+import ReactStateManagement from "components/Blogs/ReactStateManagement";
+import ScalableNodejsApis from "components/Blogs/SaclableNodejsApis";
+import TestingFullstackJavascript from "components/Blogs/TestingFullstackJavascript";
+import TypeScriptGuide from "components/Blogs/TypeScriptGuide";
+import WebPerformanceOptimization from "components/Blogs/WebPerformanceOptimization";
 import Container from "components/Container";
-import { Mdx } from "components/Mdx";
-import { allBlogs } from "contentlayer/generated";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 import React from "react";
 
-export async function generateStaticParams() {
-  return allBlogs.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-const BlogPage = () => {
+const BlogPost = () => {
   const { query } = useRouter();
+  const slug = query.slug;
 
-  console.log(query);
-  const post = allBlogs.find((post) => post.slug === query.slug);
+  const postMapper = [
+    {
+      slug: "mastering-react-hooks",
+      component: <MasteringReactHooks />,
+    },
+    {
+      slug: "scalable-nodejs-apis",
+      component: <ScalableNodejsApis />,
+    },
+    {
+      slug: "typescript-practical-guide",
+      component: <TypeScriptGuide />,
+    },
+    {
+      slug: "nextjs-14-server-components",
+      component: <NextjsServerComponents />,
+    },
+    {
+      slug: "database-design-patterns",
+      component: <DatabaseDesignPatterns />,
+    },
+    {
+      slug: "authentication-authorization",
+      component: <AuthVsAuthorization />,
+    },
+    {
+      slug: "css-grid-flexbox-guide",
+      component: <CssGridFlexboxGuide />,
+    },
+    {
+      slug: "microservices-nodejs-docker",
+      component: <MicroservicesNodejsDocker />,
+    },
+    {
+      slug: "react-state-management",
+      component: <ReactStateManagement />,
+    },
+    {
+      slug: "web-performance-optimization",
+      component: <WebPerformanceOptimization />,
+    },
+    {
+      slug: "graphql-vs-rest",
+      component: <GraphQLVsRest />,
+    },
+    {
+      slug: "testing-fullstack-javascript",
+      component: <TestingFullstackJavascript />,
+    },
+    {
+      slug: "devops-javascript-developers",
+      component: <DevopsJSDevelopers />,
+    },
+  ];
 
-  if (!post) return <div>404</div>;
-
-  return (
-    <Container
-      title="Blog – Kushal Raut"
-      description="See some of my side projects."
-    >
-      <div className="flex flex-col justify-center items-start max-w-3xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          {post?.title}
-        </h1>
-        <section>
-          <div className="flex items-center mt-4 mb-8 font-mono text-sm text-black dark:text-white">
-            <div className=" bg-neutral-100 dark:bg-neutral-800 rounded-md px-2 py-1 tracking-tighter">
-              {post?.publishedAt}
-            </div>
-            <div className="min-w-[85%] h-[0.2em] bg-neutral-50 dark:bg-neutral-700 mx-2" />
-          </div>
-          <Mdx code={post?.body?.code} />
-        </section>
-      </div>
-    </Container>
-  );
+  return <>{postMapper?.find((post) => post.slug === slug)?.component}</>;
 };
 
-export default BlogPage;
+export default BlogPost;

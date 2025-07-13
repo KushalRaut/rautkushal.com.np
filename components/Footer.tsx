@@ -30,17 +30,19 @@ export default function Footer() {
           </Link>
         </div>
         <div className="flex flex-col space-y-4">
-          <Link href="/guestbook">
-            <a className="text-gray-500 hover:text-gray-600 transition">
-              Guestbook
-            </a>
-          </Link>
           <Link href="/about">
             <a className="text-gray-500 hover:text-gray-600 transition">
               About
             </a>
           </Link>
+          <a
+            href="mailto:kushalraut5@gmail.com"
+            className="text-gray-500 hover:text-gray-600 transition"
+          >
+            Contact
+          </a>
         </div>
+
         <div className="flex flex-col space-y-4">
           <ExternalLink href="https://github.com/KushalRaut">
             Github
